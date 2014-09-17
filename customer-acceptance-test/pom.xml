@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-        <groupId>com.example.rest.yastpec</groupId>
-        <artifactId>rest-yastpec</artifactId>
+        <groupId>com.example.rest.yatspec</groupId>
+        <artifactId>rest-yatspec</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 

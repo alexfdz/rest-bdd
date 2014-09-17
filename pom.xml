@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example.rest.yastpec</groupId>
-	<artifactId>rest-yastpec</artifactId>
+	<groupId>com.example.rest.yatspec</groupId>
+	<artifactId>rest-yatspec</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -33,11 +33,19 @@
         <cucumber.jvm.version>1.0.3</cucumber.jvm.version>
         <json.path.version>0.8.1</json.path.version>
 
+        <yatspec.version>217</yatspec.version>
         <jetty.version>8.1.10.v20130312</jetty.version>
         <container.host>localhost</container.host>
         <container.port>9090</container.port>
         <webapp.module.context>${project.build.finalName}</webapp.module.context>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>bodar</id>
+            <url>http://repo.bodar.com</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
