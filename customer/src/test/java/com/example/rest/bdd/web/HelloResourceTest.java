@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class HelloResourceTest {
 
-    private HelloResource resource = new HelloResource();
+    private HomeResource resource = new HomeResource();
 
     @Test
     public void headRequestReturnsNothing(){

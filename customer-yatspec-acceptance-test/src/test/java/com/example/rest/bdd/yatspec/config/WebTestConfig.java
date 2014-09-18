@@ -1,4 +1,4 @@
-package com.example.rest.bdd.cucumber.steps.com.example.rest.bdd.yatspec.config;
+package com.example.rest.bdd.yatspec.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

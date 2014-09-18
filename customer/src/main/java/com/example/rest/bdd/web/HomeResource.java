@@ -8,7 +8,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @RequestMapping(value= "/")
-public class HelloResource {
+public class HomeResource {
 
     @RequestMapping(method= GET)
     @ResponseStatus(OK)
