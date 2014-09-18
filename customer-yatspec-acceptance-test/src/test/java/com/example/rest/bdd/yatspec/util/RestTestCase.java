@@ -1,4 +1,4 @@
-package com.example.rest.bdd.yatspec.web;
+package com.example.rest.bdd.yatspec.util;
 
 import com.example.rest.bdd.WebApp;
 import com.example.rest.bdd.config.WebConfig;
@@ -20,16 +20,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-
+import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import static com.googlecode.yatspec.internal.totallylazy.$Sequences.sequence;
 
 @RunWith(SpecRunner.class)
 public class RestTestCase extends TestState implements WithCustomResultListeners {
 
+    private static DefaultMockMvcBuilder mockMvcBuilder;
     private static MockMvc mockMvc;
     private ResultActions resultActions;
     private SequenceDiagramGenerator sequenceDiagramGenerator;
@@ -37,12 +36,14 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
 
     @BeforeClass
     public static void startServer() throws Exception {
-        mockMvc = new WebApp().start(WebConfig.class, WebTestConfig.class).getBean(MockMvc.class);
+        mockMvcBuilder = new WebApp().start(WebConfig.class, WebTestConfig.class)
+                .getBean(DefaultMockMvcBuilder.class);
     }
 
     @Before
     public void setup() {
         sequenceDiagramGenerator = new SequenceDiagramGenerator();
+        mockMvc = mockMvcBuilder.alwaysDo(new CaptureResultHandler(capturedInputAndOutputs)).build();
     }
 
     @Override

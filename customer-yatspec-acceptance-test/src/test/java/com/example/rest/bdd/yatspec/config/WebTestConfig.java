@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -16,8 +17,8 @@ public class WebTestConfig {
 
     @Bean
     @Scope("prototype")
-    public MockMvc getMockMvc() {
-        return webAppContextSetup(wac).dispatchOptions(true).build();
+    public DefaultMockMvcBuilder getMockMvcBuilder() {
+        return webAppContextSetup(wac).dispatchOptions(true);
     }
 
 }

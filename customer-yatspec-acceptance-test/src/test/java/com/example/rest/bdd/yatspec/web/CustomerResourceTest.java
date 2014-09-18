@@ -1,17 +1,14 @@
 package com.example.rest.bdd.yatspec.web;
 
+import com.example.rest.bdd.yatspec.util.RestTestCase;
 import com.googlecode.yatspec.junit.Row;
 import com.googlecode.yatspec.junit.SpecRunner;
 import com.googlecode.yatspec.junit.Table;
-import org.hamcrest.text.IsEmptyString;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 
 import static com.googlecode.yatspec.state.givenwhenthen.SyntacticSugar.the;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.text.IsEmptyString.*;
 import static org.springframework.http.HttpMethod.*;
@@ -22,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpecRunner.class)
-public class CustomerResourceTest extends RestTestCase{
+public class CustomerResourceTest extends RestTestCase {
 
     @Test
     public void headOnCustomerPageReturnsOk() throws Exception {
