@@ -1,13 +1,11 @@
 package com.example.rest.bdd.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.support.AbstractMarshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -18,7 +16,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages= "com.example.rest.bdd")
+@ComponentScan(basePackages = "com.example.rest.bdd")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -30,7 +28,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters){
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         MappingJacksonHttpMessageConverter mappingJacksonHttpMessageConverter = new MappingJacksonHttpMessageConverter();
         mappingJacksonHttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON));
         converters.add(mappingJacksonHttpMessageConverter);
@@ -42,5 +40,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         converter.setUnmarshaller(marshaller);
         converters.add(converter);
     }
-
 }

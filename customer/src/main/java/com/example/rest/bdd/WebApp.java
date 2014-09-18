@@ -1,12 +1,12 @@
 package com.example.rest.bdd;
 
 import com.example.rest.bdd.config.WebConfig;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
 public final class WebApp {
 
@@ -14,7 +14,7 @@ public final class WebApp {
         new WebApp().start(WebConfig.class);
     }
 
-    public AbstractApplicationContext start(Class<?>... configurations) throws Exception {
+    public WebApplicationContext start(Class<?>... configurations) throws Exception {
         final AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
         applicationContext.register(configurations);
 

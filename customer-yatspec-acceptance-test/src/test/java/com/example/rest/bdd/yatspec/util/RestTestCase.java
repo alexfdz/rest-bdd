@@ -2,7 +2,6 @@ package com.example.rest.bdd.yatspec.util;
 
 import com.example.rest.bdd.WebApp;
 import com.example.rest.bdd.config.WebConfig;
-import com.example.rest.bdd.yatspec.config.WebTestConfig;
 import com.googlecode.yatspec.junit.SpecResultListener;
 import com.googlecode.yatspec.junit.SpecRunner;
 import com.googlecode.yatspec.junit.WithCustomResultListeners;
@@ -20,15 +19,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.springframework.test.web.servlet.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
+import org.springframework.web.context.WebApplicationContext;
+
 import static com.googlecode.yatspec.internal.totallylazy.$Sequences.sequence;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpecRunner.class)
 public class RestTestCase extends TestState implements WithCustomResultListeners {
 
-    private static DefaultMockMvcBuilder mockMvcBuilder;
+    private static WebApplicationContext applicationContext;
     private static MockMvc mockMvc;
     private ResultActions resultActions;
     private SequenceDiagramGenerator sequenceDiagramGenerator;
@@ -36,14 +39,13 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
 
     @BeforeClass
     public static void startServer() throws Exception {
-        mockMvcBuilder = new WebApp().start(WebConfig.class, WebTestConfig.class)
-                .getBean(DefaultMockMvcBuilder.class);
+        applicationContext = new WebApp().start(WebConfig.class);
     }
 
     @Before
     public void setup() {
         sequenceDiagramGenerator = new SequenceDiagramGenerator();
-        mockMvc = mockMvcBuilder.alwaysDo(new CaptureResultHandler(capturedInputAndOutputs)).build();
+        mockMvc = webAppContextSetup(applicationContext).dispatchOptions(true).alwaysDo(new CaptureResultHandler(capturedInputAndOutputs)).build();
     }
 
     @Override
