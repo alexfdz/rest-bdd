@@ -1,4 +1,4 @@
-package com.example.rest.yatspec.web;
+package com.example.rest.bdd.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping(value= "/")
 public class HelloResource {
 
-    @RequestMapping(method= HEAD)
+    @RequestMapping(method= GET)
     @ResponseStatus(OK)
-    public void head(){}
+    public void hello(){}
 }
