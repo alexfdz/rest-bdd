@@ -2,16 +2,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example.rest.yatspec</groupId>
-	<artifactId>rest-yatspec</artifactId>
+	<groupId>com.example.rest.bdd</groupId>
+	<artifactId>rest-bdd</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>REST Services Spring implementation example with Yatspec</name>
+	<name>REST Spring implementation with BDD frameworks examples</name>
 
 	<modules>
 		<module>customer</module>
-		<module>customer-acceptance-test</module>
+		<module>customer-yatspec-acceptance-test</module>
+		<module>customer-cucumber-acceptance-test</module>
 	</modules>
 
     <properties>
@@ -21,23 +22,13 @@
 
         <log4j.version>1.2.17</log4j.version>
         <spring.version>3.2.3.RELEASE</spring.version>
-        <spring.hateoas.version>0.6.0.RELEASE</spring.hateoas.version>
-        <spring.plugin.version>0.8.0.RELEASE</spring.plugin.version>
-        <servlet-api.version>3.0.1</servlet-api.version>
-        <jackson.version>1.9.5</jackson.version>
 
         <junit.version>4.11</junit.version>
-        <mockito.version>1.9.0</mockito.version>
         <hamcrest.version>1.3</hamcrest.version>
         <cucumber.version>1.1.8</cucumber.version>
         <cucumber.jvm.version>1.0.3</cucumber.jvm.version>
-        <json.path.version>0.8.1</json.path.version>
-
         <yatspec.version>217</yatspec.version>
-        <jetty.version>8.1.10.v20130312</jetty.version>
-        <container.host>localhost</container.host>
-        <container.port>9090</container.port>
-        <webapp.module.context>${project.build.finalName}</webapp.module.context>
+        <jetty.version>9.2.2.v20140723</jetty.version>
     </properties>
 
     <repositories>
@@ -50,34 +41,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.4</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
-            </dependency>
-            <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-xc</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -85,35 +51,14 @@
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.version}</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-servlet</artifactId>
+                <version>${jetty.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-oxm</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.hateoas</groupId>
-                <artifactId>spring-hateoas</artifactId>
-                <version>${spring.hateoas.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.plugin</groupId>
-                <artifactId>spring-plugin-core</artifactId>
-                <version>${spring.plugin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.thoughtworks.xstream</groupId>
-                <artifactId>xstream</artifactId>
-                <version>1.4.4</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>${servlet-api.version}</version>
-                <scope>provided</scope>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-server</artifactId>
+                <version>${jetty.version}</version>
             </dependency>
 
             <!-- Test -->
@@ -121,46 +66,43 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-core</artifactId>
                 <version>${hamcrest.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-library</artifactId>
-                <version>${hamcrest.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.yatspec</groupId>
+                <artifactId>yatspec</artifactId>
+                <version>${yatspec.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-jvm-deps</artifactId>
                 <version>${cucumber.jvm.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-spring</artifactId>
                 <version>${cucumber.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-junit</artifactId>
                 <version>${cucumber.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jayway.jsonpath</groupId>
-                <artifactId>json-path</artifactId>
-                <version>${json.path.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -208,13 +150,6 @@
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>jetty-maven-plugin</artifactId>
-                    <version>${jetty.version}</version>
-                    <configuration></configuration>
-                </plugin>
-
             </plugins>
         </pluginManagement>
         <resources>
@@ -245,10 +180,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
