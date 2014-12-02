@@ -25,11 +25,6 @@ public class StepDefinitions {
     private MockMvc mockMvc;
     private ResultActions resultActions;
 
-    @When("^I get the home page$")
-    public void i_get_the_home_page() throws Throwable {
-        resultActions = mockMvc.perform(get("/"));
-    }
-
     @Then("^the response status is (\\d+)$")
     public void the_response_status_is(int statusCode) throws Throwable {
         resultActions.andExpect(status().is(equalTo(statusCode)));

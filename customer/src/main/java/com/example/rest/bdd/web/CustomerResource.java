@@ -27,7 +27,7 @@ public class CustomerResource {
 
     @RequestMapping(value = "/{id}", method= GET)
     @ResponseBody
-    public Customer getResource(@PathVariable final Integer id, HttpServletRequest request) throws Throwable {
+    public Customer getResource(@PathVariable final Integer id) throws Throwable {
         if(id == 1) return customer("Paquirrin");
         throw new HttpClientErrorException(NOT_FOUND);
     }
