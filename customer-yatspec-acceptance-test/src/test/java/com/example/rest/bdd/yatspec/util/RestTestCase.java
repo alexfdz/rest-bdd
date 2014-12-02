@@ -11,6 +11,7 @@ import com.googlecode.yatspec.plugin.sequencediagram.SequenceDiagramMessage;
 import com.googlecode.yatspec.plugin.sequencediagram.SvgWrapper;
 import com.googlecode.yatspec.rendering.html.DontHighlightRenderer;
 import com.googlecode.yatspec.rendering.html.HtmlResultRenderer;
+import com.googlecode.yatspec.rendering.html.index.HtmlIndexRenderer;
 import com.googlecode.yatspec.state.givenwhenthen.ActionUnderTest;
 import com.googlecode.yatspec.state.givenwhenthen.CapturedInputAndOutputs;
 import com.googlecode.yatspec.state.givenwhenthen.InterestingGivens;
@@ -39,9 +40,17 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
 
     @BeforeClass
     public static void startServer() throws Exception {
-        if(applicationContext == null){
+        if (applicationContext == null) {
             applicationContext = new WebApp().start(WebConfig.class);
         }
+    }
+
+    public static <T> T then(T t) {
+        return t;
+    }
+
+    public static <T> T to(T t) {
+        return t;
     }
 
     @Before
@@ -55,7 +64,8 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
         return sequence(
                 new HtmlResultRenderer().
                         withCustomHeaderContent(SequenceDiagramGenerator.getHeaderContentForModalWindows()).
-                        withCustomRenderer(SvgWrapper.class, new DontHighlightRenderer())).
+                        withCustomRenderer(SvgWrapper.class, new DontHighlightRenderer()),
+                new HtmlIndexRenderer()).
                 safeCast(SpecResultListener.class);
     }
 
@@ -78,8 +88,4 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
             }
         };
     }
-
-    public static <T> T then(T t) { return t;}
-
-    public static <T> T to(T t) { return t;}
 }

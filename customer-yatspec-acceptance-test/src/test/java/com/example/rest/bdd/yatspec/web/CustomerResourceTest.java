@@ -22,12 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CustomerResourceTest extends RestTestCase {
 
     @Test
-    public void headOnCustomerPageReturnsOk() throws Exception {
-        when(requested(request(HEAD, to("/customers"))));
-        then(the(response(status().isOk())));
-    }
-
-    @Test
     public void getCustomerPageWithoutIdReturnsMethodNotAllowed() throws Exception {
         when(requested(get("/customers")));
         then(the(response(status().isMethodNotAllowed())));

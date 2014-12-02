@@ -10,5 +10,4 @@ import org.junit.runner.RunWith;
         glue = {"com.example.rest.bdd.cucumber.steps"},
         features = {"src/test/resources"})
 public class FeaturesRunnerIT {
-
 }
