@@ -39,7 +39,9 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
 
     @BeforeClass
     public static void startServer() throws Exception {
-        applicationContext = new WebApp().start(WebConfig.class);
+        if(applicationContext == null){
+            applicationContext = new WebApp().start(WebConfig.class);
+        }
     }
 
     @Before

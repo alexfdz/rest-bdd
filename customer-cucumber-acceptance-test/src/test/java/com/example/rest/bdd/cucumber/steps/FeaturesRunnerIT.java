@@ -1,12 +1,14 @@
 package com.example.rest.bdd.cucumber.steps;
 
+import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(
-		format = {"html:target/cucumber-html-report" },
-		glue={"com.example.rest.bdd.cucumber.steps"})
+@CucumberOptions(
+        format   = {"json:target/cucumber.json"},
+        glue = {"com.example.rest.bdd.cucumber.steps"},
+        features = {"src/test/resources"})
 public class FeaturesRunnerIT {
 
 }

@@ -25,7 +25,7 @@ public final class WebApp {
 
         String webPort = System.getenv("PORT");
         if (webPort == null || webPort.isEmpty()) {
-            webPort = "8080";
+            webPort = "7171";
         }
 
         final Server server = new Server(Integer.valueOf(webPort));
