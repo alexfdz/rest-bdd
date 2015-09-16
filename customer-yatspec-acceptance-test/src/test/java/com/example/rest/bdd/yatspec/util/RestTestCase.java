@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.web.context.WebApplicationContext;
 
 import static com.googlecode.yatspec.internal.totallylazy.$Sequences.sequence;
+import static com.googlecode.yatspec.plugin.sequencediagram.SequenceDiagramGenerator.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpecRunner.class)
@@ -37,7 +38,6 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
     private ResultActions resultActions;
     private SequenceDiagramGenerator sequenceDiagramGenerator;
 
-
     @BeforeClass
     public static void startServer() throws Exception {
         if (applicationContext == null) {
@@ -45,25 +45,19 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
         }
     }
 
-    public static <T> T then(T t) {
-        return t;
-    }
-
-    public static <T> T to(T t) {
-        return t;
-    }
-
     @Before
     public void setup() {
         sequenceDiagramGenerator = new SequenceDiagramGenerator();
-        mockMvc = webAppContextSetup(applicationContext).dispatchOptions(true).alwaysDo(new CaptureResultHandler(capturedInputAndOutputs)).build();
+        mockMvc = webAppContextSetup(applicationContext)
+                .dispatchOptions(true)
+                .alwaysDo(new CaptureResultHandler(capturedInputAndOutputs)).build();
     }
 
     @Override
     public Iterable<SpecResultListener> getResultListeners() throws Exception {
         return sequence(
                 new HtmlResultRenderer().
-                        withCustomHeaderContent(SequenceDiagramGenerator.getHeaderContentForModalWindows()).
+                        withCustomHeaderContent(getHeaderContentForModalWindows()).
                         withCustomRenderer(SvgWrapper.class, new DontHighlightRenderer()),
                 new HtmlIndexRenderer()).
                 safeCast(SpecResultListener.class);
@@ -80,12 +74,17 @@ public class RestTestCase extends TestState implements WithCustomResultListeners
     }
 
     protected ActionUnderTest requested(final MockHttpServletRequestBuilder requestBuilder) {
-        return new ActionUnderTest() {
-            @Override
-            public CapturedInputAndOutputs execute(InterestingGivens interestingGivens, CapturedInputAndOutputs capturedInputAndOutputs) throws Exception {
-                resultActions = mockMvc.perform(requestBuilder);
-                return capturedInputAndOutputs;
-            }
+        return (interestingGivens1, capturedInputAndOutputs1) -> {
+            resultActions = mockMvc.perform(requestBuilder);
+            return capturedInputAndOutputs1;
         };
+    }
+
+    public static <T> T then(T t) {
+        return t;
+    }
+
+    public static <T> T to(T t) {
+        return t;
     }
 }
