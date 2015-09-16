@@ -1,9 +1,9 @@
 rest-bdd
 ============
 
-Spring REST API implementation with BDD examples for Cucumber and Yatspec
+BDD examples with Cucumber and YatSpec for a simple REST API
 * [Cucumber](http://cukes.info/)
-* [Yatspec](https://code.google.com/p/yatspec/)
+* [YatSpec](https://github.com/bodar/yatspec)
 
 ## Usage
 
@@ -11,6 +11,6 @@ Spring REST API implementation with BDD examples for Cucumber and Yatspec
 mvn verify
 ```
 
-* To view the Cucumber tests output check _rest-yatspec/customer-cucumber-acceptance-test/target/reports/example-rest-bdd-cucumber-steps-customer.feature.html_
-* To view the Yatspec tests output check _rest-yatspec/customer-yatspec-acceptance-test/target/reports/index.html_
+* Check the Cucumber tests output check at _customer-cucumber-acceptance-test/target/reports/example-rest-bdd-cucumber-steps-customer.feature.html_
+* Check the Yatspec tests output check at _customer-yatspec-acceptance-test/target/reports/index.html_
 
