@@ -4,17 +4,16 @@ import com.example.rest.bdd.yatspec.util.RestTestCase;
 import com.googlecode.yatspec.junit.Row;
 import com.googlecode.yatspec.junit.SpecRunner;
 import com.googlecode.yatspec.junit.Table;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static com.googlecode.yatspec.state.givenwhenthen.SyntacticSugar.the;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.text.IsEmptyString.*;
-import static org.springframework.http.HttpMethod.*;
-import static org.springframework.http.MediaType.*;
+import static org.hamcrest.text.IsEmptyString.isEmptyString;
+import static org.springframework.http.MediaType.TEXT_PLAIN;
+import static org.springframework.http.MediaType.parseMediaType;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,9 +21,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CustomerResourceTest extends RestTestCase {
 
     @Test
-    public void getCustomerPageWithoutIdReturnsMethodNotAllowed() throws Exception {
-        when(requested(get("/customers")));
-        then(the(response(status().isMethodNotAllowed())));
+    public void getWrongPathReturnsNotFound() throws Exception {
+        when(requested(get("/custodsfghytdrmers")));
+        then(the(response(status().isNotFound())));
     }
 
     @Test
@@ -53,8 +52,8 @@ public class CustomerResourceTest extends RestTestCase {
 
     @Test
     @Table({
-            @Row({"application/json"}),
-            @Row({"application/xml"})
+            @Row("application/json"),
+            @Row("application/xml")
     })
     public void getCustomerForKnownMediaTypesReturnsExpectedContentType(String mediaType) throws Exception {
         when(requested(get("/customers/1").accept(parseMediaType(mediaType))));

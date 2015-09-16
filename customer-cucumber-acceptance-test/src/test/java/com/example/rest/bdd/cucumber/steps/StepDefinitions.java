@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebAppConfiguration
-@ContextConfiguration(classes={WebTestConfig.class})
+@ContextConfiguration(classes = WebTestConfig.class)
 public class StepDefinitions {
 
     @Autowired

@@ -28,7 +28,7 @@ public class CustomerResource {
     @RequestMapping(value = "/{id}", method= GET)
     @ResponseBody
     public Customer getResource(@PathVariable final Integer id) throws Throwable {
-        if(id == 1) return customer("Paquirrin");
+        if(id == 1) return new Customer("Paquirrin");
         throw new HttpClientErrorException(NOT_FOUND);
     }
 

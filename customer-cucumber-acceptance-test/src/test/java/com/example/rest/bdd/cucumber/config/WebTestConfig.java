@@ -8,13 +8,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @Configuration
-@Import({WebConfig.class})
-public class WebTestConfig{
+@Import(WebConfig.class)
+public class WebTestConfig {
     @Autowired
     private WebApplicationContext wac;
 

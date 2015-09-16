@@ -18,20 +18,25 @@ public final class WebApp {
         final AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
         applicationContext.register(configurations);
 
-        final ServletHolder servletHolder = new ServletHolder(new DispatcherServlet(applicationContext));
-        final ServletContextHandler context = new ServletContextHandler();
-        context.setContextPath("/");
-        context.addServlet(servletHolder, "/*");
-
-        String webPort = System.getenv("PORT");
-        if (webPort == null || webPort.isEmpty()) {
-            webPort = "7171";
-        }
-
-        final Server server = new Server(Integer.valueOf(webPort));
-        server.setHandler(context);
+        final Server server = new Server(webPort());
+        server.setHandler(contextHandlerFor(applicationContext));
         server.start();
 
         return applicationContext;
+    }
+
+    private int webPort() {
+        String webPort = System.getenv("PORT");
+        if ((webPort == null) || webPort.isEmpty()) {
+            webPort = "7171";
+        }
+        return Integer.valueOf(webPort);
+    }
+
+    private ServletContextHandler contextHandlerFor(AnnotationConfigWebApplicationContext applicationContext) {
+        final ServletContextHandler context = new ServletContextHandler();
+        context.setContextPath("/");
+        context.addServlet(new ServletHolder(new DispatcherServlet(applicationContext)), "/*");
+        return context;
     }
 }

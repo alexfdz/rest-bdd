@@ -15,13 +15,7 @@ public class Customer {
     @JsonProperty
     private String name;
 
-    public void setName(String name) {
+    public Customer(String name) {
         this.name = name;
-    }
-
-    public static Customer customer(String name){
-        Customer customer = new Customer();
-        customer.setName(name);
-        return customer;
     }
 }

@@ -1,41 +1,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example.rest.bdd</groupId>
-	<artifactId>rest-bdd</artifactId>
-	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+    <groupId>com.example.rest.bdd</groupId>
+    <artifactId>rest-bdd</artifactId>
+    <packaging>pom</packaging>
+    <version>${customer.version}</version>
 
-	<name>REST Spring implementation with BDD frameworks examples</name>
+    <name>REST Spring implementation with BDD frameworks examples</name>
 
-	<modules>
-		<module>customer</module>
-		<module>customer-yatspec-acceptance-test</module>
-		<module>customer-cucumber-acceptance-test</module>
-	</modules>
+    <modules>
+        <module>customer</module>
+        <module>customer-yatspec-acceptance-test</module>
+        <module>customer-cucumber-acceptance-test</module>
+    </modules>
 
     <properties>
-        <java.version>1.6</java.version>
+        <java.version>1.8</java.version>
+        <customer.version>0.0.1-SNAPSHOT</customer.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <log4j.version>1.2.17</log4j.version>
-        <spring.version>3.2.3.RELEASE</spring.version>
-        <jackson.version>1.9.5</jackson.version>
+        <spring.version>4.2.1.RELEASE</spring.version>
+        <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
+        <fasterxml.jackson.version>2.6.2</fasterxml.jackson.version>
 
-        <junit.version>4.11</junit.version>
+        <junit.version>4.12</junit.version>
         <hamcrest.version>1.3</hamcrest.version>
-        <cucumber.version>1.1.8</cucumber.version>
-        <cucumber.jvm.version>1.0.3</cucumber.jvm.version>
-        <yatspec.version>217</yatspec.version>
-        <jetty.version>9.2.2.v20140723</jetty.version>
+        <cucumber.version>1.2.4</cucumber.version>
+        <cucumber.jvm.version>1.0.5</cucumber.jvm.version>
+        <yatspec.version>1.11</yatspec.version>
+        <jetty.version>9.3.4.RC0</jetty.version>
     </properties>
 
     <repositories>
         <repository>
             <id>bodar</id>
             <url>http://repo.bodar.com</url>
+        </repository>
+        <repository>
+            <id>MavenCentral</id>
+            <name>Maven repository</name>
+            <url>http://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 
@@ -44,48 +57,7 @@
             <dependency>
                 <groupId>com.example.rest.bdd</groupId>
                 <artifactId>customer</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-oxm</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-xc</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.thoughtworks.xstream</groupId>
-                <artifactId>xstream</artifactId>
-                <version>1.4.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-servlet</artifactId>
-                <version>${jetty.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-server</artifactId>
-                <version>${jetty.version}</version>
+                <version>${customer.version}</version>
             </dependency>
 
             <!-- Test -->
@@ -102,63 +74,9 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-library</artifactId>
-                <version>${hamcrest.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.googlecode.yatspec</groupId>
-                <artifactId>yatspec</artifactId>
-                <version>${yatspec.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jdom</groupId>
-                <artifactId>jdom</artifactId>
-                <version>1.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>jaxen</groupId>
-                <artifactId>jaxen</artifactId>
-                <version>1.1.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>net.sourceforge.plantuml</groupId>
-                <artifactId>plantuml</artifactId>
-                <version>7933</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>info.cukes</groupId>
-                <artifactId>cucumber-jvm-deps</artifactId>
-                <version>${cucumber.jvm.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>info.cukes</groupId>
-                <artifactId>cucumber-spring</artifactId>
-                <version>${cucumber.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>info.cukes</groupId>
-                <artifactId>cucumber-html</artifactId>
-                <version>0.2.3</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>info.cukes</groupId>
-                <artifactId>cucumber-junit</artifactId>
-                <version>${cucumber.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
